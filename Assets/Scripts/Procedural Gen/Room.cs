@@ -20,15 +20,21 @@ public class Room : MonoBehaviour
 
     void Awake()
     {
-        Door door = GetComponentInChildren<Door>();
-        if (door.doorDir == Door.DoorDirection.Up)
-            doorUp = true;
-        if (door.doorDir == Door.DoorDirection.Down)
-            doorDown = true;
-        if (door.doorDir == Door.DoorDirection.Left)
-            doorLeft = true;
-        if (door.doorDir == Door.DoorDirection.Right)
-            doorRight = true;
+        Door[] doors;
+
+        doors = GetComponentsInChildren<Door>();
+
+        foreach(Door door in doors)
+        {
+            if (door.doorDir == Door.DoorDirection.Up)
+                doorUp = true;
+            if (door.doorDir == Door.DoorDirection.Down)
+                doorDown = true;
+            if (door.doorDir == Door.DoorDirection.Left)
+                doorLeft = true;
+            if (door.doorDir == Door.DoorDirection.Right)
+                doorRight = true;
+        }
     }
 
     // Update is called once per frame
