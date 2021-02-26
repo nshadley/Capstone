@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public bool puzzle1 = false;
-    public bool puzzle2 = false;
+    [SerializeField]
+    public bool puzzle1;
+    [SerializeField]
+    public bool puzzle2;
 
     public enum RoomDirection { North, East, South, West};
     public RoomDirection RoomDir;
@@ -15,11 +17,11 @@ public class Room : MonoBehaviour
     protected bool doorRight = false;
     protected bool doorLeft = false;
 
+    public Door[] doors;
+
 
     void Awake()
     {
-        Door[] doors;
-
         doors = GetComponentsInChildren<Door>();
 
         foreach(Door door in doors)
@@ -61,5 +63,23 @@ public class Room : MonoBehaviour
         System.Array A = System.Enum.GetValues(typeof(T));
         T V = (T)A.GetValue(UnityEngine.Random.Range(0, A.Length));
         return V;
+    }
+
+    public Door ChooseDoor()
+    {
+        return doors[Random.Range(0, doors.Length - 1)];
+    }
+
+    public void RotateRoom()
+    {
+        int random = Random.Range(0, 1);
+        if(random == 0)
+        {
+            gameObject.transform.Rotate(0, 90, 0);
+        }
+        else
+        {
+            gameObject.transform.Rotate(0, 90, 0);
+        }
     }
 }

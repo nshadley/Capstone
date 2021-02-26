@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
     public bool connected = false;
     public enum DoorDirection {Up, Down, Left, Right};
     public DoorDirection doorDir;
+    Room parentRoom;
+
+    void Awake()
+    {
+        parentRoom = GetComponentInParent<Room>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,5 +24,33 @@ public class Door : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public bool IsDoorHorizontal()
+    {
+        if(parentRoom.RoomDir == Room.RoomDirection.East || parentRoom.RoomDir == Room.RoomDirection.West)
+        {
+            if(doorDir == DoorDirection.Down || doorDir == DoorDirection.Up)
+            {
+                return false;
+            }
+            if(doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
+            {
+                return true;
+            }
+        }
+        if (parentRoom.RoomDir == Room.RoomDirection.North || parentRoom.RoomDir == Room.RoomDirection.South)
+        {
+            if (doorDir == DoorDirection.Down || doorDir == DoorDirection.Up)
+            {
+                return true;
+            }
+            if (doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
+            {
+                return false;
+            }
+        }
+
+        return false;
     }
 }
