@@ -74,15 +74,15 @@ public class Generator : MonoBehaviour
             PickADoor();
 
             Room roomScript = room.GetComponent<Room>();
-
             Door chosenDoor = roomScript.ChooseDoor();
+
+            Instantiate(room, selectedDoor.transform.position, Quaternion.identity);
 
             if (chosenDoor.IsDoorHorizontal() != selectedDoor.IsDoorHorizontal())
             {
                 roomScript.RotateRoom();
+                chosenDoor.transform.Translate(selectedDoor.transform.position); 
             }
-
-            Instantiate(room, selectedDoor.transform.position, Quaternion.identity);
 
             chosenDoor.connected = true;
             selectedDoor.connected = true;

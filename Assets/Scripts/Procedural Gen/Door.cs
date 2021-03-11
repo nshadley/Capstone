@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     public bool connected = false;
     public enum DoorDirection {Up, Down, Left, Right};
     public DoorDirection doorDir;
-    Room parentRoom;
+    public Room parentRoom;
 
     void Awake()
     {
@@ -28,7 +28,7 @@ public class Door : MonoBehaviour
 
     public bool IsDoorHorizontal()
     {
-        if(parentRoom.RoomDir == Room.RoomDirection.East || parentRoom.RoomDir == Room.RoomDirection.West)
+        if (parentRoom.RoomDir == Room.RoomDirection.East || parentRoom.RoomDir == Room.RoomDirection.West)
         {
             if(doorDir == DoorDirection.Down || doorDir == DoorDirection.Up)
             {

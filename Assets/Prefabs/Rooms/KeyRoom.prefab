@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8446919562121573831}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children:
@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8446919562159034928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0.5000004, y: 0, z: -0.5}
   m_LocalScale: {x: 0.5, y: 10, z: 0.1}
   m_Children: []
   m_Father: {fileID: 8446919562121573848}
@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea589319a27ebb4299c9cb79d7ff419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connected: 0
+  connected: 1
   doorDir: 3
+  parentRoom: {fileID: 8446919562121573828}
 --- !u!1 &8446919563022615624
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 0
+  parentRoom: {fileID: 8446919562121573828}
 --- !u!1 &8446919563218623587
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8446919563218623587}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: -0.5}
   m_LocalScale: {x: 0.1, y: 10, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8446919562121573848}
@@ -438,5 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea589319a27ebb4299c9cb79d7ff419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connected: 0
+  connected: 1
   doorDir: 1
+  parentRoom: {fileID: 8446919562121573828}

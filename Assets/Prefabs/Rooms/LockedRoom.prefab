@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 3
+  parentRoom: {fileID: 6937478413911302001}
 --- !u!1 &6937478413911302000
 GameObject:
   m_ObjectHideFlags: 0

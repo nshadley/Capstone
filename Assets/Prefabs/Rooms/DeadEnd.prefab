@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2439478992901042339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5000002, y: 0, z: -0.000000047683717}
   m_LocalScale: {x: 0.1, y: 10, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2439478994331548346}
@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea589319a27ebb4299c9cb79d7ff419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connected: 0
+  connected: 1
   doorDir: 0
+  parentRoom: {fileID: 2439478994331548342}
 --- !u!1 &2439478994331548341
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +136,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2439478994331548341}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children:

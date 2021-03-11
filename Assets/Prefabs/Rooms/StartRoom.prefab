@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 0
+  parentRoom: {fileID: 5407020649479549413}
 --- !u!1 &5407020650441714948
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 3
+  parentRoom: {fileID: 5407020649479549413}
 --- !u!1 &5407020651084606386
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 1
+  parentRoom: {fileID: 5407020649479549413}
 --- !u!1 &5407020651286991375
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,3 +553,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 2
+  parentRoom: {fileID: 5407020649479549413}
