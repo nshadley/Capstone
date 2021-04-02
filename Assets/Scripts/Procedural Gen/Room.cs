@@ -36,20 +36,24 @@ public class Room : MonoBehaviour
                 doorRight = true;
         }
 
-        RoomDir = GetRandomEnum<RoomDirection>();
+        if(gameObject.name != "StartRoom")
+        {
+            RoomDir = GetRandomEnum<RoomDirection>();
 
-        if(RoomDir == RoomDirection.East)
-        {
-            gameObject.transform.Rotate(0, 90, 0);
+            if (RoomDir == RoomDirection.East)
+            {
+                gameObject.transform.Rotate(0, 90, 0);
+            }
+            else if (RoomDir == RoomDirection.South)
+            {
+                gameObject.transform.Rotate(0, 180, 0);
+            }
+            else if (RoomDir == RoomDirection.West)
+            {
+                gameObject.transform.Rotate(0, 270, 0);
+            }
         }
-        else if(RoomDir == RoomDirection.South)
-        {
-            gameObject.transform.Rotate(0, 180, 0);
-        }
-        else if (RoomDir == RoomDirection.West)
-        {
-            gameObject.transform.Rotate(0, 270, 0);
-        }
+
     }
 
     // Update is called once per frame
@@ -70,16 +74,67 @@ public class Room : MonoBehaviour
         return doors[Random.Range(0, doors.Length - 1)];
     }
 
-    public void RotateRoom()
+    public void RotateRoom(GameObject theRoom)
     {
         int random = Random.Range(0, 1);
         if(random == 0)
         {
-            gameObject.transform.Rotate(0, 90, 0);
+            theRoom.transform.Rotate(0, 90, 0);
+            rightDirection();
         }
         else
         {
-            gameObject.transform.Rotate(0, 90, 0);
+            theRoom.transform.Rotate(0, -90, 0);
+            leftDirection();
+        }
+    }
+
+    public void TurnRoomAround(GameObject theRoom)
+    {
+        theRoom.transform.Rotate(0, 180, 0);
+        rightDirection();
+        rightDirection();
+    }
+
+    void rightDirection()
+    {
+        switch (RoomDir)
+        {
+            case RoomDirection.North:
+                RoomDir = RoomDirection.East;
+                break;
+            case RoomDirection.East:
+                RoomDir = RoomDirection.South;
+                break;
+            case RoomDirection.South:
+                RoomDir = RoomDirection.West;
+                break;
+            case RoomDirection.West:
+                RoomDir = RoomDirection.North;
+                break;
+            default:
+                break;
+        }
+    }
+
+    void leftDirection()
+    {
+        switch (RoomDir)
+        {
+            case RoomDirection.North:
+                RoomDir = RoomDirection.West;
+                break;
+            case RoomDirection.West:
+                RoomDir = RoomDirection.South;
+                break;
+            case RoomDirection.South:
+                RoomDir = RoomDirection.East;
+                break;
+            case RoomDirection.East:
+                RoomDir = RoomDirection.North;
+                break;
+            default:
+                break;
         }
     }
 }

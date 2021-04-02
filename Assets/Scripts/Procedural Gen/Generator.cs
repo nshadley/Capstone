@@ -15,6 +15,13 @@ public class Generator : MonoBehaviour
     Door[] currentDoors;
     Door selectedDoor;
 
+    GameManager gm;
+
+    void Awake()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
+
     //Start is called before the first frame update
     void Start()
     {
@@ -74,18 +81,33 @@ public class Generator : MonoBehaviour
             PickADoor();
 
             Room roomScript = room.GetComponent<Room>();
-            Door chosenDoor = roomScript.ChooseDoor();
 
-            Instantiate(room, selectedDoor.transform.position, Quaternion.identity);
+            GameObject newRoom = Instantiate(room, selectedDoor.transform.position, room.transform.rotation);
+
+            Door chosenDoor = newRoom.GetComponent<Room>().ChooseDoor();
+            GameObject childDoor = chosenDoor.gameObject;
+            GameObject toDoor = selectedDoor.gameObject;
+
+            newRoom.transform.position += toDoor.transform.position;
 
             if (chosenDoor.IsDoorHorizontal() != selectedDoor.IsDoorHorizontal())
             {
-                roomScript.RotateRoom();
-                chosenDoor.transform.Translate(selectedDoor.transform.position); 
+                do
+                {
+                    roomScript.RotateRoom(newRoom);
+                }
+                while (childDoor.transform.position != toDoor.transform.position);
+            }
+            
+            if (childDoor.transform.position != toDoor.transform.position)
+            {
+                roomScript.TurnRoomAround(newRoom);
             }
 
-            chosenDoor.connected = true;
+            childDoor.GetComponent<Door>().connected = true;
+            toDoor.GetComponent<Door>().connected = true;
             selectedDoor.connected = true;
+            chosenDoor.connected = true;
         }
     }
 

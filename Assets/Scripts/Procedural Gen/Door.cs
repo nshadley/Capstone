@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     public DoorDirection doorDir;
     public Room parentRoom;
 
-    void Awake()
+    public virtual void Awake()
     {
         parentRoom = GetComponentInParent<Room>();
     }
@@ -34,18 +34,18 @@ public class Door : MonoBehaviour
             {
                 return false;
             }
-            if(doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
+            else if(doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
             {
                 return true;
             }
         }
-        if (parentRoom.RoomDir == Room.RoomDirection.North || parentRoom.RoomDir == Room.RoomDirection.South)
+        else if (parentRoom.RoomDir == Room.RoomDirection.North || parentRoom.RoomDir == Room.RoomDirection.South)
         {
             if (doorDir == DoorDirection.Down || doorDir == DoorDirection.Up)
             {
                 return true;
             }
-            if (doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
+            else if (doorDir == DoorDirection.Left || doorDir == DoorDirection.Right)
             {
                 return false;
             }
