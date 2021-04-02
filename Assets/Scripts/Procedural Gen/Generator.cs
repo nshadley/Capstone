@@ -17,6 +17,9 @@ public class Generator : MonoBehaviour
 
     GameManager gm;
 
+    [SerializeField]
+    GameObject wall;
+
     void Awake()
     {
         gm = FindObjectOfType<GameManager>();
@@ -27,6 +30,7 @@ public class Generator : MonoBehaviour
     {
         GenerateRooms();
         PlaceRooms();
+        //CleanUpDoors();
     }
 
     // Update is called once per frame
@@ -108,6 +112,21 @@ public class Generator : MonoBehaviour
             toDoor.GetComponent<Door>().connected = true;
             selectedDoor.connected = true;
             chosenDoor.connected = true;
+
+            //delete doors if they are not locked
+            if(!childDoor.GetComponent<LockedDoor>() && !toDoor.GetComponent<LockedDoor>())
+            {
+                Destroy(childDoor);
+                Destroy(toDoor);
+            }
+            else if(childDoor.GetComponent<LockedDoor>())
+            {
+                Destroy(toDoor);
+            }
+            else
+            {
+                Destroy(childDoor);
+            }
         }
     }
 
@@ -141,6 +160,19 @@ public class Generator : MonoBehaviour
                 pickedRooms.Add(aRoom);
             }
 
+        }
+    }
+
+    void CleanUpDoors()
+    {
+        currentDoors = FindObjectsOfType<Door>();
+        foreach(Door door in currentDoors)
+        {
+            if(!door.connected)
+            {
+                Instantiate(wall, door.transform.position, door.transform.rotation);
+                Destroy(door);
+            }
         }
     }
 }

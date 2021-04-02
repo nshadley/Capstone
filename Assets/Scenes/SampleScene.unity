@@ -152,13 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c3a3785f541274b9992eff9c573010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRooms: 1
+  numberOfRooms: 3
   availableRooms:
   - {fileID: 2955211631203648528, guid: 82bac4be72b38b1419b0a046b6779e50, type: 3}
   - {fileID: 2439478994331548341, guid: 53e62b4239264e845a1c9d0a49dca31a, type: 3}
   - {fileID: 8697350534462413511, guid: b9f0e53ebe8e7124e9b20c74490cc10b, type: 3}
   - {fileID: 8446919562121573831, guid: 44848184eb622e94792692721d337060, type: 3}
   - {fileID: 6937478413911302000, guid: a7b65fd6a526b30479079cfe5a2bde24, type: 3}
+  wall: {fileID: 4348501575072793296, guid: 1103ad705c6061442910b2a82a1b8178, type: 3}
 --- !u!114 &28659209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
   playerScriptRef: {fileID: 0}
+  puzzleManagerRef: {fileID: 0}
   ingameUIRef: {fileID: 0}
 --- !u!1001 &622028996
 PrefabInstance:
