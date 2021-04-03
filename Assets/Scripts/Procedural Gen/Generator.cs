@@ -92,13 +92,29 @@ public class Generator : MonoBehaviour
             GameObject childDoor = chosenDoor.gameObject;
             GameObject toDoor = selectedDoor.gameObject;
 
-            newRoom.transform.position += toDoor.transform.position;
+            if(toDoor.tag == "StartRoom")
+            {
+                newRoom.transform.position += toDoor.transform.position;
+                Debug.Log("The to door is a starting door");
+            }
+            else
+            {
+                //newRoom.transform.position += toDoor.transform.position - childDoor.transform.position;
+                Debug.Log("The to door is NOT a starting door");
+                newRoom.transform.position += toDoor.transform.position - toDoor.transform.parent.position;
+            }
 
-            if (chosenDoor.IsDoorHorizontal() != selectedDoor.IsDoorHorizontal())
+            Debug.Log("To door horizontal");
+            Debug.Log(selectedDoor.IsDoorHorizontal());
+            Debug.Log("chosen door horizontal");
+            Debug.Log(chosenDoor.IsDoorHorizontal());
+
+           /* if (chosenDoor.IsDoorHorizontal() != selectedDoor.IsDoorHorizontal())
             {
                 do
                 {
                     roomScript.RotateRoom(newRoom);
+                    Debug.Log("Rotating room");
                 }
                 while (childDoor.transform.position != toDoor.transform.position);
             }
@@ -106,7 +122,8 @@ public class Generator : MonoBehaviour
             if (childDoor.transform.position != toDoor.transform.position)
             {
                 roomScript.TurnRoomAround(newRoom);
-            }
+                Debug.Log("Turning room around");
+            }*/
 
             childDoor.GetComponent<Door>().connected = true;
             toDoor.GetComponent<Door>().connected = true;
