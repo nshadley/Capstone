@@ -80,58 +80,60 @@ public class Room : MonoBehaviour
         if(random == 0)
         {
             theRoom.transform.Rotate(0, 90, 0);
-            rightDirection();
+            rightDirection(theRoom);
         }
         else
         {
             theRoom.transform.Rotate(0, -90, 0);
-            leftDirection();
+            leftDirection(theRoom);
         }
     }
 
     public void TurnRoomAround(GameObject theRoom)
     {
         theRoom.transform.Rotate(0, 180, 0);
-        rightDirection();
-        rightDirection();
+        rightDirection(theRoom);
+        rightDirection(theRoom);
     }
 
-    void rightDirection()
+    void rightDirection(GameObject theRoom)
     {
-        switch (RoomDir)
+        Room theRoomScript = theRoom.GetComponent<Room>();
+        switch (theRoomScript.RoomDir)
         {
             case RoomDirection.North:
-                RoomDir = RoomDirection.East;
+                theRoomScript.RoomDir = RoomDirection.East;
                 break;
             case RoomDirection.East:
-                RoomDir = RoomDirection.South;
+                theRoomScript.RoomDir = RoomDirection.South;
                 break;
             case RoomDirection.South:
-                RoomDir = RoomDirection.West;
+                theRoomScript.RoomDir = RoomDirection.West;
                 break;
             case RoomDirection.West:
-                RoomDir = RoomDirection.North;
+                theRoomScript.RoomDir = RoomDirection.North;
                 break;
             default:
                 break;
         }
     }
 
-    void leftDirection()
+    void leftDirection(GameObject theRoom)
     {
-        switch (RoomDir)
+        Room theRoomScript = theRoom.GetComponent<Room>();
+        switch (theRoomScript.RoomDir)
         {
             case RoomDirection.North:
-                RoomDir = RoomDirection.West;
+                theRoomScript.RoomDir = RoomDirection.West;
                 break;
             case RoomDirection.West:
-                RoomDir = RoomDirection.South;
+                theRoomScript.RoomDir = RoomDirection.South;
                 break;
             case RoomDirection.South:
-                RoomDir = RoomDirection.East;
+                theRoomScript.RoomDir = RoomDirection.East;
                 break;
             case RoomDirection.East:
-                RoomDir = RoomDirection.North;
+                theRoomScript.RoomDir = RoomDirection.North;
                 break;
             default:
                 break;

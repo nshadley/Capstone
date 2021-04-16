@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Generator : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class Generator : MonoBehaviour
     [SerializeField]
     List<GameObject> availableRooms = new List<GameObject>();
 
+    [SerializeField]
+    List<GameObject> puzzleRooms = new List<GameObject>();
+
     List<GameObject> pickedRooms = new List<GameObject>();
 
-    Door[] currentDoors;
+    List<Door> currentDoors = new List<Door>();
+
     Door selectedDoor;
 
     GameManager gm;
@@ -25,28 +30,33 @@ public class Generator : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
     }
 
-    //Start is called before the first frame update
+    ////Start is called before the first frame update
     void Start()
     {
         GenerateRooms();
         PlaceRooms();
-        //CleanUpDoors();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
 
-    }
+    //}
 
     void GenerateRooms()
     {
-        AddPuzzleRooms();       
+        AddPuzzleRooms();
         Debug.Assert(pickedRooms.Count > 0, "No puzzle rooms were picked");
         AddRandomRooms();
 
         //shuffle rooms
         pickedRooms = ShuffleList<GameObject>(pickedRooms);
+
+        //if a dead end is the first room, shuffle again
+        if (pickedRooms[0].tag == "Dead End")
+        {
+            pickedRooms = ShuffleList<GameObject>(pickedRooms);
+        }
     }
 
     private List<E> ShuffleList<E>(List<E> inputList)
@@ -66,13 +76,14 @@ public class Generator : MonoBehaviour
 
     void PickADoor()
     {
-        currentDoors = FindObjectsOfType<Door>();
+        currentDoors.AddRange(FindObjectsOfType<Door>());
 
-        Door doorCheck = currentDoors[Random.Range(0, currentDoors.Length - 1)];
+        Door doorCheck = currentDoors[Random.Range(0, currentDoors.Count)];
+
 
         while (doorCheck.connected)
         {
-            doorCheck = currentDoors[Random.Range(0, currentDoors.Length - 1)];
+            doorCheck = currentDoors[Random.Range(0, currentDoors.Count)];
         }
 
         selectedDoor = doorCheck;
@@ -82,8 +93,12 @@ public class Generator : MonoBehaviour
     {
         foreach (GameObject room in pickedRooms)
         {
-            PickADoor();
+            
 
+            DeleteDoorsWithWalls();
+
+            PickADoor();
+            Debug.Log("Current door count " + currentDoors.Count);
             Room roomScript = room.GetComponent<Room>();
 
             GameObject newRoom = Instantiate(room, selectedDoor.transform.position, room.transform.rotation);
@@ -92,51 +107,85 @@ public class Generator : MonoBehaviour
             GameObject childDoor = chosenDoor.gameObject;
             GameObject toDoor = selectedDoor.gameObject;
 
-            if(toDoor.tag == "StartRoom")
+            Debug.Log(newRoom.name + " is connecting to " + toDoor.transform.parent.name);
+
+            //first rotate rooms to match horizontally or vertically
+            if (childDoor.GetComponent<Door>().IsDoorHorizontal() != toDoor.GetComponent<Door>().IsDoorHorizontal())
             {
+                roomScript.RotateRoom(newRoom);
+            }
+
+            if (toDoor.tag == "StartRoom")
+            {
+                //this only works becauase the start room is at the origin
                 newRoom.transform.position += toDoor.transform.position;
                 Debug.Log("The to door is a starting door");
+                if (childDoor.transform.position != toDoor.transform.position)
+                {
+                    roomScript.TurnRoomAround(newRoom);
+                }
             }
             else
             {
-                //newRoom.transform.position += toDoor.transform.position - childDoor.transform.position;
-                Debug.Log("The to door is NOT a starting door");
-                newRoom.transform.position += toDoor.transform.position - toDoor.transform.parent.position;
-            }
-
-            Debug.Log("To door horizontal");
-            Debug.Log(selectedDoor.IsDoorHorizontal());
-            Debug.Log("chosen door horizontal");
-            Debug.Log(chosenDoor.IsDoorHorizontal());
-
-           /* if (chosenDoor.IsDoorHorizontal() != selectedDoor.IsDoorHorizontal())
-            {
-                do
+                //change room loaction based on position of doors
+                if (childDoor.transform.position.x != toDoor.transform.position.x)
                 {
-                    roomScript.RotateRoom(newRoom);
-                    Debug.Log("Rotating room");
+                    Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
+                    Debug.Log("xDifference is " + xDifference);
+                    newRoom.transform.position += xDifference;
                 }
-                while (childDoor.transform.position != toDoor.transform.position);
-            }
-            
-            if (childDoor.transform.position != toDoor.transform.position)
-            {
-                roomScript.TurnRoomAround(newRoom);
-                Debug.Log("Turning room around");
-            }*/
+                if (childDoor.transform.position.z != toDoor.transform.position.z)
+                {
+                    Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
+                    Debug.Log("zDifference is " + zDifference);
+                    newRoom.transform.position += zDifference;
+                }
 
+                //rooms need to be turned around and moved again if positions are still not correct
+                if (childDoor.transform.position != toDoor.transform.position ||
+                    (childDoor.transform.parent.transform.position == toDoor.transform.parent.transform.position))
+                {
+                    roomScript.TurnRoomAround(newRoom);
+
+                    //change room loaction based on position of doors
+                    if (childDoor.transform.position.x != toDoor.transform.position.x)
+                    {
+                        Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
+                        Debug.Log("xDifference is " + xDifference);
+                        newRoom.transform.position += xDifference;
+                    }
+                    if (childDoor.transform.position.z != toDoor.transform.position.z)
+                    {
+                        Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
+                        Debug.Log("zDifference is " + zDifference);
+                        newRoom.transform.position += zDifference;
+                    }
+                }
+
+                Room[] currentRooms = FindObjectsOfType<Room>();
+                foreach(Room r in currentRooms)
+                {
+                    if(r.gameObject != newRoom && r.gameObject.transform.position == newRoom.transform.position)
+                    {
+                        //rooms collide, not sure what to do about this
+                    }
+                }
+
+            }
+
+            //mark doors as connected
             childDoor.GetComponent<Door>().connected = true;
             toDoor.GetComponent<Door>().connected = true;
             selectedDoor.connected = true;
             chosenDoor.connected = true;
 
             //delete doors if they are not locked
-            if(!childDoor.GetComponent<LockedDoor>() && !toDoor.GetComponent<LockedDoor>())
+            if (!childDoor.GetComponent<LockedDoor>() && !toDoor.GetComponent<LockedDoor>())
             {
                 Destroy(childDoor);
                 Destroy(toDoor);
             }
-            else if(childDoor.GetComponent<LockedDoor>())
+            else if (childDoor.GetComponent<LockedDoor>())
             {
                 Destroy(toDoor);
             }
@@ -144,35 +193,57 @@ public class Generator : MonoBehaviour
             {
                 Destroy(childDoor);
             }
+
+            //find all unconnected doors and mark them as connected if collides with a wall or another door
+            List<Door> openDoors = new List<Door>(FindObjectsOfType<Door>());
+            for (int index = 0; index < openDoors.Count; index++)
+            {
+                if (!openDoors[index].connected)
+                {
+                    bool theresAWall = false;
+                    Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, new Vector3(.5f, .5f, .5f));
+                    foreach (Collider col in overlaps)
+                    {
+                        if (col.gameObject.tag == "Wall")
+                        {
+                            theresAWall = true;
+                        }
+                    }
+                    if (theresAWall)
+                    {
+                        openDoors[index].connected = true;
+                    }
+                }
+                index++;
+            }
         }
     }
 
     void AddPuzzleRooms()
     {
-        foreach (GameObject r in availableRooms)
+        foreach (GameObject r in puzzleRooms)
         {
             Room tempRoom = r.GetComponent<Room>();
-            if (tempRoom.puzzle1)
-            {
-                pickedRooms.Add(r);
-            }
+            pickedRooms.Add(r);
         }
     }
 
     void AddRandomRooms()
     {
+        int deadEndCount = 0;
         while (pickedRooms.Count < numberOfRooms)
         {
-            bool itsANewRoom = false;
-            GameObject aRoom = availableRooms[Random.Range(0, availableRooms.Count - 1)];
-            foreach (GameObject ro in pickedRooms)
+            //bool itsANewRoom = false;
+            GameObject aRoom = availableRooms[Random.Range(0, availableRooms.Count)];
+            if (aRoom.tag == "Dead End")
             {
-                if (ro != aRoom)
+                if (deadEndCount < numberOfRooms / 2)
                 {
-                    itsANewRoom = true;
+                    pickedRooms.Add(aRoom);
+                    deadEndCount++;
                 }
             }
-            if (itsANewRoom)
+            else
             {
                 pickedRooms.Add(aRoom);
             }
@@ -180,15 +251,21 @@ public class Generator : MonoBehaviour
         }
     }
 
-    void CleanUpDoors()
+    void DeleteDoorsWithWalls()
     {
-        currentDoors = FindObjectsOfType<Door>();
-        foreach(Door door in currentDoors)
+        //if a door is colliding with a wall, delete it
+
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        currentDoors.AddRange(FindObjectsOfType<Door>());
+
+        for(int index = 0; index < currentDoors.Count; index++)
         {
-            if(!door.connected)
+            foreach (GameObject wall in walls)
             {
-                Instantiate(wall, door.transform.position, door.transform.rotation);
-                Destroy(door);
+                if (currentDoors[index].gameObject.transform.position == wall.transform.position)
+                {
+                    Destroy(currentDoors[index].gameObject);
+                }
             }
         }
     }

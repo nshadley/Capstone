@@ -6,9 +6,18 @@ public class DestroyCollidingWalls : MonoBehaviour
 {
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Wall")
+        //Debug.Log("theres a collision");
+        if(col.gameObject.tag == "Wall" || col.gameObject.tag == "SideWall")
         {
-            Destroy(this);
+            //Debug.Log("the collision is with a wall");
+            if (col.gameObject.layer == 8)
+            {
+                Destroy(this);
+            }
+            else if(gameObject.layer != 8)
+            {
+                Destroy(col.gameObject);
+            }
         }
     }
 }

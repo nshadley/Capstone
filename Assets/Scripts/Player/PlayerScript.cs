@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
 
     //inventory variables
     public bool haveKey;
+    public bool win;
 
     // Start is called before the first frame update
     void Start()

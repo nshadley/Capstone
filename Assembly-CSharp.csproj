@@ -59,8 +59,10 @@
      <Compile Include="Assets\Scripts\Game Management\PuzzleManager.cs" />
      <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
      <Compile Include="Assets\Scripts\Items\KeyItem.cs" />
+     <Compile Include="Assets\Scripts\Items\WinItem.cs" />
      <Compile Include="Assets\Scripts\Player\MouseLook.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Procedural Gen\CheckDoorCollisions.cs" />
      <Compile Include="Assets\Scripts\Procedural Gen\DestroyCollidingWalls.cs" />
      <Compile Include="Assets\Scripts\Procedural Gen\Door.cs" />
      <Compile Include="Assets\Scripts\Procedural Gen\Generator.cs" />

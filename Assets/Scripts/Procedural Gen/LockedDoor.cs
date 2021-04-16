@@ -17,7 +17,14 @@ public class LockedDoor : Door
     // Update is called once per frame
     void Update()
     {
-        
+        if (Vector3.Distance(gm.playerRef.transform.position, transform.position) < interactionDistance)
+        {
+            gm.ingameUIRef.ShowDoorText();
+        }
+        else
+        {
+            gm.ingameUIRef.HideDoorText();
+        }
     }
 
     void OnMouseDown()
@@ -27,11 +34,15 @@ public class LockedDoor : Door
             if(!gm.playerScriptRef.haveKey)
             {
                 //display door is locked
+                gm.ingameUIRef.ShowDoorText();
             }
             else
             {
+                gm.ingameUIRef.HideDoorText();
                 //unlock door
+                Destroy(gameObject);
             }
         }
+        
     }
 }

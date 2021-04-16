@@ -7,6 +7,8 @@ public class Door : MonoBehaviour
     public bool connected = false;
     public enum DoorDirection {Up, Down, Left, Right};
     public DoorDirection doorDir;
+    public enum DoorFacing { North, East, South, West};
+    public DoorFacing doorFace;
     public Room parentRoom;
 
     public virtual void Awake()
@@ -52,5 +54,13 @@ public class Door : MonoBehaviour
         }
 
         return false;
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Wall")
+        {
+            connected = true;
+        }
     }
 }

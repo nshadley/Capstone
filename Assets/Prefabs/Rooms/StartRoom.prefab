@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 941958ea961a00f4381460f03a0699b5, type: 2}
+  - {fileID: 2100000, guid: 9306430f780e6884480bd294cddd2925, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 5407020649907356719}
   - component: {fileID: 5407020649907356720}
   - component: {fileID: 5407020649907356721}
+  - component: {fileID: 6302166591637606943}
   m_Layer: 0
   m_Name: DoorRight
   m_TagString: StartRoom
@@ -183,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50d2502e6cd516840a4816234a0e256f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -231,7 +232,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 3
+  doorFace: 1
   parentRoom: {fileID: 5407020649479549413}
+--- !u!114 &6302166591637606943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407020649907356723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85866160fe4ff54eab6fac4491cd183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5407020650441714948
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +259,7 @@ GameObject:
   - component: {fileID: 5407020650441714944}
   - component: {fileID: 5407020650441714945}
   - component: {fileID: 5407020650441714946}
+  - component: {fileID: 684375245920800246}
   m_Layer: 0
   m_Name: DoorDown
   m_TagString: StartRoom
@@ -292,7 +307,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50d2502e6cd516840a4816234a0e256f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -340,7 +355,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 1
+  doorFace: 2
   parentRoom: {fileID: 5407020649479549413}
+--- !u!114 &684375245920800246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407020650441714948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85866160fe4ff54eab6fac4491cd183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5407020651084606386
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +382,7 @@ GameObject:
   - component: {fileID: 5407020651084606382}
   - component: {fileID: 5407020651084606383}
   - component: {fileID: 5407020651084606384}
+  - component: {fileID: 7328971274844082072}
   m_Layer: 0
   m_Name: DoorLeft
   m_TagString: StartRoom
@@ -401,7 +430,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50d2502e6cd516840a4816234a0e256f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,7 +478,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 2
+  doorFace: 3
   parentRoom: {fileID: 5407020649479549413}
+--- !u!114 &7328971274844082072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407020651084606386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85866160fe4ff54eab6fac4491cd183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5407020651286991375
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +505,7 @@ GameObject:
   - component: {fileID: 5407020651286991371}
   - component: {fileID: 5407020651286991372}
   - component: {fileID: 5407020651286991373}
+  - component: {fileID: 6718835679596892562}
   m_Layer: 0
   m_Name: DoorUp
   m_TagString: StartRoom
@@ -510,7 +553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50d2502e6cd516840a4816234a0e256f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -558,7 +601,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   doorDir: 0
+  doorFace: 0
   parentRoom: {fileID: 5407020649479549413}
+--- !u!114 &6718835679596892562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407020651286991375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85866160fe4ff54eab6fac4491cd183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1889398225040060694
 PrefabInstance:
   m_ObjectHideFlags: 0
