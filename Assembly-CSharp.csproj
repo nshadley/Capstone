@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Audio\AudioScript.cs" />
      <Compile Include="Assets\Scripts\Game Management\GameManager.cs" />
      <Compile Include="Assets\Scripts\Game Management\PuzzleManager.cs" />
      <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
@@ -69,6 +70,7 @@
      <Compile Include="Assets\Scripts\Procedural Gen\LockedDoor.cs" />
      <Compile Include="Assets\Scripts\Procedural Gen\Room.cs" />
      <Compile Include="Assets\Scripts\UI\InGameUI.cs" />
+     <Compile Include="Assets\Scripts\UI\TitleMenuController.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

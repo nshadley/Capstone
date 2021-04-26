@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 6302166591637606943}
   m_Layer: 0
   m_Name: DoorRight
-  m_TagString: StartRoom
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 684375245920800246}
   m_Layer: 0
   m_Name: DoorDown
-  m_TagString: StartRoom
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7328971274844082072}
   m_Layer: 0
   m_Name: DoorLeft
-  m_TagString: StartRoom
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 6718835679596892562}
   m_Layer: 0
   m_Name: DoorUp
-  m_TagString: StartRoom
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

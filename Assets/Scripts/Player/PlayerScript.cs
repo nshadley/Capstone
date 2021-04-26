@@ -33,5 +33,13 @@ public class PlayerScript : MonoBehaviour
         move = transform.right * xMove + transform.forward * zMove;
 
         controller.Move(move * movespeed * Time.deltaTime);
+
+        if(win)
+        {
+            if(Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
     }
 }

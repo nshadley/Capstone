@@ -39,6 +39,7 @@ public class LockedDoor : Door
             else
             {
                 gm.ingameUIRef.HideDoorText();
+                FindObjectOfType<AudioScript>().soundEffectSource.PlayOneShot(FindObjectOfType<AudioScript>().doorSound);
                 //unlock door
                 Destroy(gameObject);
             }

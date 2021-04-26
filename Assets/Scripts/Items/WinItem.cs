@@ -23,6 +23,11 @@ public class WinItem : ItemBase
 
         gm.playerScriptRef.win = true;
         gm.ingameUIRef.ShowWinText();
+        FindObjectOfType<AudioScript>().soundEffectSource.PlayOneShot(FindObjectOfType<AudioScript>().winSound);
+        FindObjectOfType<AudioScript>().bgMusicSource.clip = FindObjectOfType<AudioScript>().winMusic;
+        FindObjectOfType<AudioScript>().bgMusicSource.volume = .8f;
+        FindObjectOfType<AudioScript>().bgMusicSource.loop = true;
+        FindObjectOfType<AudioScript>().bgMusicSource.Play();
         base.PickUp();
     }
 }

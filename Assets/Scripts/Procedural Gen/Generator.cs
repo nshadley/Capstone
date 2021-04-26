@@ -204,7 +204,7 @@ public class Generator : MonoBehaviour
                     Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, new Vector3(.5f, .5f, .5f));
                     foreach (Collider col in overlaps)
                     {
-                        if (col.gameObject.tag == "Wall")
+                        if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Door")
                         {
                             theresAWall = true;
                         }

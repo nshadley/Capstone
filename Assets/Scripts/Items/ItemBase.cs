@@ -29,19 +29,14 @@ public class ItemBase : MonoBehaviour
         if (Vector3.Distance(gm.playerRef.transform.position, transform.position) < interactionDistance)
         {
             itemLight.enabled = true;
+            if(Input.GetMouseButton(0))
+            {
+                PickUp();
+            }
         }
         else
         {
             itemLight.enabled = false;
-        }
-    }
-
-    void OnMouseDown()
-    {
-        if(Vector3.Distance(gm.playerRef.transform.position, transform.position) < interactionDistance)
-        {
-            itemLight.enabled = true;
-            PickUp();
         }
     }
 

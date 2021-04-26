@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 933005957596138470}
   m_Layer: 0
   m_Name: DoorUp
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 6468164113289822428}
   m_Layer: 0
   m_Name: DoorDown
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
