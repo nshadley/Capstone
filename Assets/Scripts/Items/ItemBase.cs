@@ -8,6 +8,8 @@ public class ItemBase : MonoBehaviour
 
     Light itemLight;
 
+    public GameObject pickUpParticle;
+
     [SerializeField]
     float interactionDistance = 2.5f;
 
@@ -43,7 +45,6 @@ public class ItemBase : MonoBehaviour
     public virtual void PickUp()
     {
         //specific item stuff to be overridden here
-
         
         Destroy(gameObject);
     }

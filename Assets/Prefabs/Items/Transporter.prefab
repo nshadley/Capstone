@@ -327,6 +327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  pickUpParticle: {fileID: 59819456685194706, guid: 7f938a2314f95d8418c86d7c35357c94,
+    type: 3}
   interactionDistance: 2.5
 --- !u!1001 &4816263855251918920
 PrefabInstance:

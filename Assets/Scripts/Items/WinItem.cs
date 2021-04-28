@@ -19,7 +19,7 @@ public class WinItem : ItemBase
     public override void PickUp()
     {
 
-        Debug.Log("You Win!");
+        Instantiate(pickUpParticle, transform);
 
         gm.playerScriptRef.win = true;
         gm.ingameUIRef.ShowWinText();

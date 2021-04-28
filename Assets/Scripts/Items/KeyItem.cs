@@ -23,6 +23,7 @@ public class KeyItem : ItemBase
         gm.playerScriptRef.haveKey = true;
         gm.ingameUIRef.UpdateKeyUI();
         FindObjectOfType<AudioScript>().soundEffectSource.PlayOneShot(FindObjectOfType<AudioScript>().keySound);
+        Instantiate(pickUpParticle, transform);
         base.PickUp();
     }
 }

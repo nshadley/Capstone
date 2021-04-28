@@ -160,6 +160,7 @@ MonoBehaviour:
   - {fileID: 6042862890548188206, guid: f64f84ce93347f142a652fa7fbc48959, type: 3}
   - {fileID: 1608139440514401705, guid: 59c4ec16ae948894ea3e1cfb122e2a05, type: 3}
   - {fileID: 2657737553871308622, guid: 661e5224dd51bcd488cc4796cf027b1f, type: 3}
+  - {fileID: 5325118349072700930, guid: dddd291201e53c24ba8c65c892d3d4d9, type: 3}
   puzzleRooms:
   - {fileID: 6937478413911302000, guid: a7b65fd6a526b30479079cfe5a2bde24, type: 3}
   - {fileID: 8446919562121573831, guid: 44848184eb622e94792692721d337060, type: 3}
@@ -203,8 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66535fa4ed16d3144ad7d792ae6cdf0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRef: {fileID: 0}
-  playerScriptRef: {fileID: 0}
+  playerRef: {fileID: 1672548388}
+  playerScriptRef: {fileID: 1672548389}
   puzzleManagerRef: {fileID: 0}
   ingameUIRef: {fileID: 0}
 --- !u!1 &369020149

@@ -76,6 +76,7 @@ public class Generator : MonoBehaviour
 
     void PickADoor()
     {
+        currentDoors.Clear();
         currentDoors.AddRange(FindObjectsOfType<Door>());
 
         Door doorCheck = currentDoors[Random.Range(0, currentDoors.Count)];
@@ -211,7 +212,7 @@ public class Generator : MonoBehaviour
                     }
                     if (theresAWall)
                     {
-                        openDoors[index].connected = true;
+                        openDoors[index].gameObject.GetComponent<Door>().connected = true;
                     }
                 }
                 index++;
