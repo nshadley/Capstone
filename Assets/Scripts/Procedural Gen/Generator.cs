@@ -79,13 +79,17 @@ public class Generator : MonoBehaviour
         currentDoors.Clear();
         currentDoors.AddRange(FindObjectsOfType<Door>());
 
-        Door doorCheck = currentDoors[Random.Range(0, currentDoors.Count)];
+        List<Door> tempDoors = new List<Door>();
 
-
-        while (doorCheck.connected)
+        for (int i = 0; i < currentDoors.Count; i++)
         {
-            doorCheck = currentDoors[Random.Range(0, currentDoors.Count)];
+            if (!currentDoors[i].connected)
+            {
+                tempDoors.Add(currentDoors[i]);
+            }
         }
+
+        Door doorCheck = tempDoors[Random.Range(0, tempDoors.Count)];
 
         selectedDoor = doorCheck;
     }
@@ -94,12 +98,9 @@ public class Generator : MonoBehaviour
     {
         foreach (GameObject room in pickedRooms)
         {
-            
-
             DeleteDoorsWithWalls();
 
             PickADoor();
-            Debug.Log("Current door count " + currentDoors.Count);
             Room roomScript = room.GetComponent<Room>();
 
             GameObject newRoom = Instantiate(room, selectedDoor.transform.position, room.transform.rotation);
@@ -132,13 +133,13 @@ public class Generator : MonoBehaviour
                 if (childDoor.transform.position.x != toDoor.transform.position.x)
                 {
                     Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
-                    Debug.Log("xDifference is " + xDifference);
+                    //Debug.Log("xDifference is " + xDifference);
                     newRoom.transform.position += xDifference;
                 }
                 if (childDoor.transform.position.z != toDoor.transform.position.z)
                 {
                     Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
-                    Debug.Log("zDifference is " + zDifference);
+                    //bug.Log("zDifference is " + zDifference);
                     newRoom.transform.position += zDifference;
                 }
 
@@ -152,13 +153,13 @@ public class Generator : MonoBehaviour
                     if (childDoor.transform.position.x != toDoor.transform.position.x)
                     {
                         Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
-                        Debug.Log("xDifference is " + xDifference);
+                        //bug.Log("xDifference is " + xDifference);
                         newRoom.transform.position += xDifference;
                     }
                     if (childDoor.transform.position.z != toDoor.transform.position.z)
                     {
                         Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
-                        Debug.Log("zDifference is " + zDifference);
+                        //Debug.Log("zDifference is " + zDifference);
                         newRoom.transform.position += zDifference;
                     }
                 }
@@ -199,10 +200,10 @@ public class Generator : MonoBehaviour
             List<Door> openDoors = new List<Door>(FindObjectsOfType<Door>());
             for (int index = 0; index < openDoors.Count; index++)
             {
-                if (!openDoors[index].connected)
+                if (!openDoors[index].connected && openDoors[index].gameObject.GetComponentInParent<Room>().gameObject.tag != "StartRoom")
                 {
                     bool theresAWall = false;
-                    Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, new Vector3(.5f, .5f, .5f));
+                    Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, openDoors[index].transform.localScale / 2);
                     foreach (Collider col in overlaps)
                     {
                         if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Door")
@@ -212,10 +213,10 @@ public class Generator : MonoBehaviour
                     }
                     if (theresAWall)
                     {
+                        Debug.Log(openDoors[index] + "is being marked as connected");
                         openDoors[index].gameObject.GetComponent<Door>().connected = true;
                     }
                 }
-                index++;
             }
         }
     }
