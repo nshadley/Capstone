@@ -37,12 +37,6 @@ public class Generator : MonoBehaviour
         PlaceRooms();
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
     void GenerateRooms()
     {
         AddPuzzleRooms();
@@ -133,13 +127,11 @@ public class Generator : MonoBehaviour
                 if (childDoor.transform.position.x != toDoor.transform.position.x)
                 {
                     Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
-                    //Debug.Log("xDifference is " + xDifference);
                     newRoom.transform.position += xDifference;
                 }
                 if (childDoor.transform.position.z != toDoor.transform.position.z)
                 {
                     Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
-                    //bug.Log("zDifference is " + zDifference);
                     newRoom.transform.position += zDifference;
                 }
 
@@ -153,13 +145,11 @@ public class Generator : MonoBehaviour
                     if (childDoor.transform.position.x != toDoor.transform.position.x)
                     {
                         Vector3 xDifference = new Vector3((toDoor.transform.position.x - childDoor.transform.position.x), 0, 0);
-                        //bug.Log("xDifference is " + xDifference);
                         newRoom.transform.position += xDifference;
                     }
                     if (childDoor.transform.position.z != toDoor.transform.position.z)
                     {
                         Vector3 zDifference = new Vector3(0, 0, (toDoor.transform.position.z - childDoor.transform.position.z));
-                        //Debug.Log("zDifference is " + zDifference);
                         newRoom.transform.position += zDifference;
                     }
                 }
@@ -175,13 +165,11 @@ public class Generator : MonoBehaviour
 
             }
 
-            //mark doors as connected
             childDoor.GetComponent<Door>().connected = true;
             toDoor.GetComponent<Door>().connected = true;
             selectedDoor.connected = true;
             chosenDoor.connected = true;
 
-            //delete doors if they are not locked
             if (!childDoor.GetComponent<LockedDoor>() && !toDoor.GetComponent<LockedDoor>())
             {
                 Destroy(childDoor);
@@ -203,7 +191,7 @@ public class Generator : MonoBehaviour
                 if (!openDoors[index].connected && openDoors[index].gameObject.GetComponentInParent<Room>().gameObject.tag != "StartRoom")
                 {
                     bool theresAWall = false;
-                    Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, openDoors[index].transform.localScale / 2);
+                    Collider[] overlaps = Physics.OverlapBox(openDoors[index].transform.position, new Vector3(.5f, .5f, .5f));
                     foreach (Collider col in overlaps)
                     {
                         if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Door")
@@ -235,7 +223,6 @@ public class Generator : MonoBehaviour
         int deadEndCount = 0;
         while (pickedRooms.Count < numberOfRooms)
         {
-            //bool itsANewRoom = false;
             GameObject aRoom = availableRooms[Random.Range(0, availableRooms.Count)];
             if (aRoom.tag == "Dead End")
             {
@@ -255,8 +242,6 @@ public class Generator : MonoBehaviour
 
     void DeleteDoorsWithWalls()
     {
-        //if a door is colliding with a wall, delete it
-
         GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
         currentDoors.AddRange(FindObjectsOfType<Door>());
 
