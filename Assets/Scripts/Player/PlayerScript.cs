@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
     protected Vector3 move;
 
     [SerializeField]
-    protected float movespeed = 10f;
+    protected float movespeed = 3f;
 
     //inventory variables
     public bool haveKey;
